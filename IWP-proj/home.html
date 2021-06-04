@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="keywords" content="Apartment website">
+		<meta name="description" content="Commercial website for making apartment sales">
+		<meta name="author" content="Students of VIT">
+		<title></title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			.main{
+				width:auto;
+				height:auto;
+				position:absolute;
+			}
+			.sub{
+				position:absolute;
+				width:100vw;
+				height:100vh;
+				font-size:3em;
+				z-index : 10 ;
+			}
+			.sub-first{
+				background-image:url('first.jpeg');
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat, repeat;
+			}
+			.sub-second{
+				transform:translateX(25%);
+				transition: transform 0.5s;
+				background-image:url('second.jpeg');
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat, repeat;
+			}
+			.sub-third{
+				transform:translateX(50%);
+				transition: transform 0.5s;
+				background-image:url('third.jpeg');
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat, repeat;
+			}
+			.sub-fourth{
+				transform:translateX(75%);
+				transition: transform 0.5s;
+				background-image:url('fourth.jpeg');
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat, repeat;
+			}
+			.sub-first:hover ~.sub-second{
+			}
+			.sub-first:hover ~.sub-third{
+			}
+			.sub-first:hover ~.sub-fourth{
+			}
+
+			.sub-second:hover{
+				transform:translateX(0);
+			}
+			.sub-second:hover ~.sub-third{
+			}
+			.sub-second:hover ~.sub-fourth{
+			}
+
+			.sub-third:hover{
+				transform:translateX(0);
+			}
+			.sub-third:hover ~.sub-fourth{
+			}
+
+			.sub-fourth:hover{
+				transform:translateX(0);
+			}
+			.nav-bar{
+				position:fixed;
+				width:90vw;
+				margin-left: 5vw;
+				margin-top: 2vh;
+				height:5rem;
+				background-color:white;
+				text-align:center;
+				z-index:20;
+				color:black;
+			}
+			.nav-container{
+				position:absolute;
+				left:50%;
+				top:50%;
+				transform:translateX(-50%) translateY(-50%);
+			}
+			.nav-text{
+				font-size:2.5em;
+			}
+			.main-text{
+				position:absolute;
+				font:3em;
+				z-index:30;
+			}
+			.sub-text{
+				position:absolute;
+				margin-top:55vh;
+				color:black;
+                font-size:1.5em;
+				transform:translateX(-50%) translateY(-50%);
+			}
+			.text-first{
+				margin-left:12.5vw;
+				background-color:white;
+				padding: 0.8vw;
+			}
+			.text-second{
+				margin-left:37.5vw;
+				background-color:white;
+				padding: 0.8vw;
+			}
+			.text-third{
+				margin-left:62.5vw;
+				background-color:white;
+				padding: 0.8vw;
+			}
+			.text-fourth{
+				margin-left:87.5vw;
+				background-color:white;
+				padding: 0.8vw;
+			}
+			.use_map{
+				position: absolute;
+				height:100vh;
+				width : 100vw;
+				top:100vh;
+				/*transform:translateY(100vh);*/
+				background-color:#d4e3fa;
+				color:black;
+				display: grid;
+				grid-template-areas: 'use_map_left use_map_right';
+			}
+			.use_map_left{
+				position: relative;
+				display: grid;
+				grid-area:use_map_left;
+			}
+			.use_map_right{
+				position: relative;
+				display: grid;
+				grid-area : use_map_right;
+			}
+			.use_map_right_text{
+				padding-left:15vh;
+				padding-right:15vh;
+				text-align: center;
+				margin-top:auto;
+				margin-bottom:auto;
+				/*transform:translateY(-25%);*/
+			}
+			.use_map_left_image{
+				margin-left:15vh;
+				margin-right:15vh;
+				text-align: center;
+				margin-top:auto;
+				margin-bottom:auto;
+				width:50vw;
+				height:60vh;
+				background-image: url('fifth.jpeg');
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			h1{
+				font-size: 3em;
+			}
+			.video{
+				position: absolute;
+				top:200vh;
+				width:100vw;
+				height:100vh;
+				background-color: black;
+				color:white;
+			}
+			.frame{
+				position: relative;
+				margin-top:auto;
+				margin-bottom:auto;
+				margin-left: auto;
+				margin-right: auto;
+				width:60vw;
+				height: 100vh;
+			}
+			iframe{
+				position:relative;
+				width:100%;
+				height:60%;
+				margin-top:auto;
+				/*margin-bottom:auto;*/
+				top:20vh;
+			}
+			.frame-title{
+				padding-bottom:1vh;
+				position:relative;
+				padding-left:auto;
+				transform:translateX(27.5%);
+				top:10vh;
+			}
+			.form{
+				position: absolute;
+				top:300vh;
+				width:100vw;
+				height:100vh;
+				background-color: grey;
+				color:black;
+			}
+			.form-body{
+				color:black;
+				background-color:lightblue;
+				position: relative;
+				top:15vh;
+				font-size: 1.5em;
+				margin-left: auto;
+				margin-right: auto;
+				width:60vw;
+				height: 60vh;
+			}
+			.image{
+				position:absolute;
+				height:100vh;
+				width:100vw;
+			}
+			h3{
+				text-align: center;
+			}
+			td{
+				padding:2vw;
+			}
+			input{
+				width:80%;
+			}
+			.radio{
+				width:10%;
+			}
+			.submit{
+				width:100%;
+				background-color:black;
+				color:white;
+			}
+        .bottom{
+            top:5rem;
+        }
+        .bottom-two{
+            top:5rem;
+            margin-left:37.5vw;
+        }
+        .bottom-three{
+            top:5rem;
+            margin-left:62.5vw;
+        }
+        .bottom-four{
+            top:5rem;
+            margin-left:87.5vw;
+        }
+        a:link{
+            color:black;
+            text-decoration:none;
+        }
+		</style>
+	</head>
+	<body>
+		<!--- THIS IS THE NAVIGATION BAR --->
+		<nav class='nav-bar'>
+			<div class="nav-container">
+				<div class="nav-text">
+					APARTMENT SOLUTIONS
+				</div>
+			</div>
+		</nav>
+		<!--- THIS HOLDS THE INFORMATION AND IMAGES FOR THE FIRST MAIN PAGE --->
+		<div class="main">
+			<div class="sub-first sub">
+			</div>
+			<div class="sub-second sub">
+			</div>
+			<div class="sub-third sub">
+			</div>
+			<div class="sub-fourth sub">
+			</div>
+		</div>
+		<div class="main-text">
+			<div class="sub-text text-first">
+				<a href="database/courier-2.HTML">COURIER</a>
+			</div>
+            <div class="sub-text text-first bottom">
+                <a href="database/payment-2.HTML">PAYMENT</a>
+            </div>
+			<div class="sub-text text-second">
+				<a href="database/Building-2.HTML">BUILDING DETAILS</a>
+			</div>
+            <div class="sub-text text-first bottom-two">
+                <a href="database/visitors-2.HTML">VISITOR</a>
+            </div>
+			<div class="sub-text text-third">
+				<a href="database/IDENTIFICATION-2.HTML">IDENTIFICATION</a>
+			</div>
+            <div class="sub-text text-first bottom-three">
+                <a href="database/Owner-2.HTML">OWNER</a>
+            </div>
+			<div class="sub-text text-fourth">
+				<a href="database/Maid-2.HTML">MAID</a>
+			</div>
+            <div class="sub-text text-first bottom-four">
+                <a href="database/resident-2.HTML">RESIDENT</a>
+            </div>
+		</div>
+		<!--- THIS IS THE PAGE WHICH APPEARS ON THE SECOND SCROLL --->
+		<div class="use_map">
+			<div class="use_map_left">
+				<div class="use_map_left_image">
+				</div>
+			</div>
+			<div class="use_map_right">
+				<div class="use_map_right_text">
+					<h1 class="head">Singaporean Design.</h1><br><br>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+			</div>
+		</div>
+		<!--- ONT THE THIRD SCROLL WE REVEAL AN ADVERTISING VIDEO --->
+		<div class="video">
+			<div class="frame">
+				<div class="frame-title">
+					<h1>Watch Our Video.</h1>
+				</div>
+				<iframe width="1424" height="652" src="https://www.youtube.com/embed/3PUgO--D1NM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+		</div>
+		<!--- HERE WE ALLOW INTERESTED PEOPLE TO APPLY FOR JOBS, AND USE IMAGE MAP --->
+		<div class="form">
+			<img src="seventh.jpeg" class='image' alt="" usemap="#image-map">
+			<map name="image-map">
+					<area target="" alt="Building A" title="Building A" href="" coords="1404,25,2237,1339,3269,1344,4088,25" shape="poly">
+					<area target="" alt="Building B" title="Building B" href="" coords="134,3546,2421,2331,3111,2311,5561,3665" shape="poly">
+					<area target="" alt="Building C" title="Building C" href="" coords="79,3442,1449,2787,1444,2217,60,2261" shape="poly">
+					<area target="" alt="Building D" title="Building D" href="" coords="4068,2207,4073,2757,5571,3620,5576,2212" shape="poly">
+					<area target="" alt="Clubhouse" title="Clubhouse" href="" coords="4138,40,4187,1056,4832,1096,5581,669,5591,30" shape="poly">
+					<area target="" alt="Theatre" title="Theatre" href="" coords="25,30,20,1017,873,1389,1454,1359,1508,223,1369,35" shape="poly">
+			</map>
+			<table class="form-body" border='3'>
+				<tr>
+					<td colspan='2'> <h3>APPLY FOR A JOB !</h3> </td>
+				</tr>
+				<tr>
+					<td>Name </td>
+					<td> <label> <input type="text" name="" value=""> </label> </td>
+				</tr>
+				<tr>
+					<td>Position </td>
+					<td> <label> <input type="radio" name="" value="" class="radio"> Maid </label> <br>
+					<label> <input type="radio" name="" value="" class="radio"> Security </label><br>
+					 <label> <input type="radio" name="" value="" class="radio"> Chef </label> </td>
+				</tr>
+				<tr>
+					<td>Email </td>
+					<td> <label> <input type="text" name="" value=""> </label> </td>
+				</tr>
+				<tr>
+					<td>Age </td>
+					<td> <label> <input type="text" name="" value=""> </label> </td>
+				</tr>
+				<tr>
+					<td colspan='2'> <input type="submit" name="" value="SUBMIT" class='radio submit'> </td>
+				</tr>
+				<!---<tr>
+					<td> <label>Put your Qualifications <textarea name="Put your Qualifications" rows="8" cols="80"></textarea> </label></td>
+				</tr>-->
+
+			</table>
+		</div>
+	</body>
+</html>

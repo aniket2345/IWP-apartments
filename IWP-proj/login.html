@@ -1,0 +1,56 @@
+
+<html>
+    <head>
+        <style>
+        body{
+            position:absolute;
+            width:100vw;
+            height:100vh;
+            background-image: url("back.jpeg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        table{
+            font-size:2em;
+            color:black;
+            /*transform:translateX(-50%);*/
+        }
+        td{
+            text-align:center;
+            padding:0.5em;
+        }
+        </style>
+    </head>
+    <body>
+        <table id="login-box">
+            <tr>
+                <td>Username : </td>
+                <td><input type="text" id="Username"></input></td>
+            </tr>
+            <tr>
+                <td>Password : </td>
+                <td><input type="password" id="Password"></input></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="execute()">SUBMIT</button></td>
+            </tr>
+        </table>
+    <script>
+
+        function execute(){
+            username = document.getElementById("Username").value;
+            password = document.getElementById("Password").value;
+            if(username!=="Admin" || password!="Password"){
+                alert("Incorrect username or password");
+            }else{
+                window.location.href = "home.html";
+            }
+        }
+
+        
+    </script>
+    </body>
+
+</html>
+

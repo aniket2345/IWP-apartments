@@ -1,0 +1,248 @@
+
+<html>
+    <head>
+        <style>
+            *{
+                padding:0;
+                margin:0;
+            }
+            body{
+                position:absolute;
+                height:100vh;
+                width:100vw;
+                text-align:center;
+            }
+            #Background{
+                position:absolute;
+                height:110%;
+                width:110%;
+                left:-5%;
+                top:-5%;
+                
+                background-image: url("diamond.jpeg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                filter:blur(5px);
+            }
+            #title{
+                position:absolute;
+                width:100%;
+                height:10%;
+                background-color:black;
+            }
+        #text{
+            position:absolute;
+            width:80%;
+            height:50%;
+            left:50%;
+            top:50%;
+            transform:translateX(-50%)translateY(-50%);
+            color:white;
+            font-size:2em;
+        }
+        #Body{
+            position:absolute;
+            width:100%;
+            height:90%;
+            top:10%;
+        }
+        table{
+            text-align:center;
+            position:absolute;
+            width:50%;
+            height:80%;
+            left:50%;
+            top:50%;
+            transform:translateX(-50%)translateY(-50%);
+            text-align:center;
+        }
+        td{
+            font-size:1.35em;
+            background-color:white;
+        }
+        button{
+            width:80%;
+            height:45%;
+            font-size:1em;
+            /*
+            background-color: white;
+            border: none;
+            color: black;
+            
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            
+            cursor: pointer;*/
+        }
+        input{
+            width:80%;
+            height:45%;
+            border: none;
+            border-bottom: 2px solid black;
+            background-color: lightgrey;
+            color: black;
+
+        }
+        #left-col{
+        }
+        #adbt{
+            text-align:center;
+            background-color:transparent;
+        }
+        #addmaidbtn{
+            width:50%;
+        }
+            
+        </style>
+    </head>
+
+        <body>
+            
+            <div id="Background"></div>
+            <div id="title"><div id="text">MAID DETAILS</div></div>
+            <div id="Body">
+                <table border=2>
+                    <tr>
+                        <td id="left-col" >ID</td>
+                        <td colspan=2><input id="Id" type="text" name="ID" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td colspan=2><input id="Name" type="text" name="ID" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td colspan=2><input id="Contact" type="text" name="ID" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td colspan=2><input id="Address" type="text" name="ID" value=""></td>
+                    </tr>
+                    <tr>
+                        <td colspan=3 id="adbt"><button id = 'addmaidbtn'>Add Entry</button></td>
+                    </tr>
+                    <tr>
+                        <td>Enter ID</td>
+                        <td><input id="showid" type="text" name="ID" value=""></td>
+                        <td><button id = "showmaidbtn">Show Information</button></td>
+                    </tr>
+                    <tr>
+                        <td>Delete This ID</td>
+                        <td><input id = "deleteid" type="text" name="ID" value=""></td>
+                        <td><button id = "deletemaidbtn">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+    
+       <script>
+        
+                /*const createDBbtn = document.getElementById("createDBbtn");
+                createDBbtn.addEventListener("click",createDB);*/
+        
+                const addmaidbtn = document.getElementById("addmaidbtn");
+                addmaidbtn.addEventListener("click",addmaid);
+        
+                const showmaidbtn = document.getElementById("showmaidbtn");
+                showmaidbtn.addEventListener("click",showmaid);
+        
+                const deletemaidbtn = document.getElementById("deletemaidbtn");
+                deletemaidbtn.addEventListener("click",deletemaid);
+                    var db = null;
+                    var request = indexedDB.open("maid");
+                    // on upgrade
+                    request.onupgradeneeded = e => {
+                        alert(`upgrade is called`);
+                        db = e.target.result;
+                        const TL1 = db.createObjectStore("maidList",{keyPath: "ID"});
+                    }
+                    // on success
+                    request.onsuccess = e => {
+                        db = e.target.result;
+                        alert("success is called");
+                    }
+                    //on error
+                    request.onerror = e =>{
+                        alert("error is called");
+                    }
+                    //createDB();
+        
+                function addmaid(){
+        
+                    var Idd = document.getElementById("Id").value;
+                    var pattern = /^M[0-9]{4}$/g;
+                    var result = pattern.test(Idd);
+                    if(!result){
+                        alert("INVALID Id");
+                        return false;
+                    }
+                    var Namee = document.getElementById("Name").value;
+                    var pattern = /^[a-zA-Z]+ [a-zA-Z]+$/g;
+                    var result = pattern.test(Namee);
+                    if(!result){
+                        alert("INVALID Name");
+                        return false;
+                    }
+                    var Contactt = document.getElementById("Contact").value;
+                    var pattern = /^[0-9]{10}$/g;
+                    var result = pattern.test(Contactt);
+                    if(!result){
+                        alert("INVALID Contactt");
+                        return false;
+                    }
+                    var Addresss = document.getElementById("Address").value;
+        
+                    const maids = {
+                        ID : Idd,
+                        Name : Namee,
+                        Contact : Contactt,
+                        Address : Addresss
+                    }
+                    const tx = db.transaction("maidList","readwrite");
+                    const TL2 = tx.objectStore("maidList");
+                    TL2.add(maids);
+                    alert("Data has been added");
+                }
+                function showmaid(e){
+                    var Idd = document.getElementById("showid").value;
+                    const tx_show = db.transaction("maidList","readwrite");
+                    const tl_show = tx_show.objectStore("maidList");
+                    const r = tl_show.get(Idd);
+                    r.onerror = function(even){
+                        alert("unable to do");
+                    }
+                    r.onsuccess = function(event){
+                        var c = r.result;
+                        if(r.result){
+                            alert("ID : "+c.ID+" Name : "+c.Name+" Contact : "+c.Contact+" Address : "+c.Address);
+                        }
+                        else{
+                            alert("No such data found");
+                        }
+                    }
+                    /*
+                    var tc_show = tl_show.openCursor(null,"prev");
+                    var c = e.target.result;
+                    if(c){
+                        alert("ID : "+c.key+" Name : "+c.value.Name+" Contact : "+c.value.Contact+" Address : "+c.value.Address);
+                        c.continue();
+                    }*/
+                }
+                function deletemaid(){
+                    var Idd = document.getElementById("deleteid").value;
+                    /*const tx_show = db.transaction("maidList","readwrite");
+                    const tl_show = tx_show.objectStore("maidList");
+                    const r = tl_show.get(Idd);*/
+                    var r = db.transaction("maidList","readwrite").objectStore("maidList").delete(Idd);
+                    r.onsuccess = function(event){
+                        alert("it has been removed");
+                    }
+                    r.onerror = function(event){
+                        alert("ERROR ");
+                    }
+                }
+            </script>
+        </body>
+</html>
+
